@@ -121,8 +121,7 @@ func (geod *Geodesic) a3Coeff() {
 
 func (geod *Geodesic) c3Coeff() {
 	// return coefficients for C3
-	coeff := []float64{3, 128, 2, 5, 128, -1, 3, 3, 64, -1, 0, 1, 8, -1, 1, 4, 5, 256, 1, 3, 128, -3, -2, 3, 64, 1, -3, 2, 32, 7, 512, -10, 9, 384, 5, -9, 5, 192, 7, 512, -14, 7, 512, 21, 2560,
-	}
+	coeff := []float64{3, 128, 2, 5, 128, -1, 3, 3, 64, -1, 0, 1, 8, -1, 1, 4, 5, 256, 1, 3, 128, -3, -2, 3, 64, 1, -3, 2, 32, 7, 512, -10, 9, 384, 5, -9, 5, 192, 7, 512, -14, 7, 512, 21, 2560}
 	o := 0
 	k := 0
 	for l := 1; l < nC3; l++ {
@@ -685,7 +684,6 @@ func (geod *Geodesic) genInverse(lat1, lon1, lat2, lon2 float64, outmask int) (a
 		sig12 := math.Atan2(math.Max(0.0, csig1*ssig2-ssig1*csig2),
 			csig1*csig2+ssig1*ssig2)
 
-		var s12x, m12x float64
 		s12x, m12x, _, M12, M21 = geod.lengths(
 			geod.n, sig12, ssig1, csig1, dn1, ssig2, csig2, dn2, cbet1, cbet2,
 			outmask|DISTANCE|reducedLength, C1a, C2a)
@@ -932,7 +930,6 @@ func (geod *Geodesic) genInverse(lat1, lon1, lat2, lon2 float64, outmask int) (a
 	calp2 *= swapp * latsign
 	return a12, s12, salp1, calp1, salp2, calp2, m12, M12, M21, S12
 }
-
 
 func sinCosSeries(sinp bool, sinx, cosx float64, c []float64) float64 {
 	// Evaluate a trig series using Clenshaw summation.
